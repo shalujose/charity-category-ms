@@ -34,7 +34,7 @@ public class CategoryController {
  * This method is used to add a new category
  * takes object as parameters
  * returns the success or failure message
- * @throws ValidatorException 
+ * @throws ValidatorException on input error
  * 
  */
 	@PostMapping()
@@ -59,7 +59,7 @@ public class CategoryController {
 	 * This method shows the list of different categories
 	 * It does not takes input parameters
 	 * returns the category list
-	 * @throws ServiceException 
+	 * @throws ServiceException in case of empty data
 	 * 
 	 */
 	

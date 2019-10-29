@@ -55,7 +55,7 @@ public class CategoryService {
 
 	/**
 	 * This method list all the categories
-	 * @return list this returns all the categories
+	 * @return list this returns category list
 	 * @throws ServiceException 
 	 */
 	@Transactional

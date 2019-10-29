@@ -11,6 +11,11 @@ import com.revature.charityappcategoryms.service.AdminService;
 @Component
 public class CategoryValidator {
 	
+	/**
+	 * This method validate categoryName and creatorId
+	 * @param category is the parameter to categoryValidation
+	 * @throws ValidatorException in case of invalid values
+	 */
 	public void categoryValidation(Category category) throws ValidatorException {
        
         String categoryName=category.getCategoryName();
