@@ -69,7 +69,12 @@ public class CategoryService {
 		return catelist;
 	}
 
-
+	/**
+	 * This method is used for delete category
+	 * @param categoryId is the parameter to deleteCategory method
+	 * @throws ServiceException in case of invalid categoryId
+	 */
+	
 	@Transactional
 	public void deleteCategory( int categoryId) throws ServiceException {
 		Category category =new Category();

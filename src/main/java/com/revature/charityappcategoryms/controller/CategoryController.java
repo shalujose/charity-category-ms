@@ -73,6 +73,12 @@ public class CategoryController {
 
 	}
 	
+	/**
+	 * This method delete category data
+	 * @param categoryId
+	 * @return response success or failure
+	 * @throws ServiceException on input error
+	 */
 	@DeleteMapping("{id}")
 	@ApiOperation(value = "categoryAPI")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Category deleted", response = String.class),
