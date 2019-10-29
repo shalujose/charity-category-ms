@@ -20,10 +20,14 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	/*
-	 * This method is used to set values for insertion Takes createdBy parameter as
-	 * integer takes categoryName parameter as String takes active parameter as
-	 * boolean takes createdDate and ModifiedDate parameter as LocalDateTime
+	/**
+	 * This method is used to add new categories 
+	 * @param categoryDTO as the 
+	 * takes createdBy parameter as integer 
+	 * takes categoryName parameter as String 
+	 * takes active parameter as boolean 
+	 * takes createdDate and ModifiedDate parameter as LocalDateTime
+	 * @throws ServiceException in case of invalid values
 	 */
 	@Transactional
 	public void addCategory(CategoryDTO categoryDTO) throws ServiceException {
@@ -44,6 +48,10 @@ public class CategoryService {
 
 	}
 
+	/**
+	 * This method list all the categories
+	 * @return list this returns all the categories
+	 */
 	@Transactional
 	public List<Category> listCategory() {
 		return categoryRepository.findAll();
