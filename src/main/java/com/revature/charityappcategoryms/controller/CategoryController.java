@@ -60,7 +60,7 @@ public class CategoryController {
 	 * 
 	 */
 	
-	@GetMapping("/listCategory")
+	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Category> viewCategory() {
 		List<Category> viewResponse = categoryService.listCategory();
