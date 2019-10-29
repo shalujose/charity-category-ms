@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.charityappcategoryms.dto.CategoryDTO;
 import com.revature.charityappcategoryms.dto.Message;
 import com.revature.charityappcategoryms.exception.ServiceException;
+import com.revature.charityappcategoryms.exception.ValidatorException;
 import com.revature.charityappcategoryms.model.Category;
 import com.revature.charityappcategoryms.service.CategoryService;
 
@@ -29,10 +30,11 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
- /*
+ /**
  * This method is used to add a new category
- * Takes object as parameters
+ * takes object as parameters
  * returns the success or failure message
+ * @throws ValidatorException 
  * 
  */
 	@PostMapping()
@@ -40,7 +42,7 @@ public class CategoryController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Category added", response = String.class),
 			@ApiResponse(code = 400, message = "Invalid Category", response = Category.class) })
 
-	public ResponseEntity<?> addCategory(@RequestBody CategoryDTO categoryDTO) {
+	public ResponseEntity<?> addCategory(@RequestBody CategoryDTO categoryDTO) throws ValidatorException {
 
 		try {
 			categoryService.addCategory(categoryDTO);
@@ -53,16 +55,17 @@ public class CategoryController {
 
 	}
 
-	/*
+	/**
 	 * This method shows the list of different categories
 	 * It does not takes input parameters
 	 * returns the category list
+	 * @throws ServiceException 
 	 * 
 	 */
 	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Category> viewCategory() {
+	public List<Category> viewCategory() throws ServiceException {
 		List<Category> viewResponse = categoryService.listCategory();
 		return viewResponse;
 
