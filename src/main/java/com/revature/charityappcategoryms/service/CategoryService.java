@@ -2,6 +2,7 @@ package com.revature.charityappcategoryms.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -68,6 +69,17 @@ public class CategoryService {
 		
 		return catelist;
 	}
+	
+	@Transactional
+	public List<Category> listActiveCategory() throws ServiceException {
+		List<Category> catelist=null;
+		catelist= categoryRepository.findActiveCategories();
+		if(catelist.isEmpty()) {
+			throw new ServiceException(MessageConstant.INVALID_LIST);
+		}
+		
+		return catelist;
+	}
 
 	/**
 	 * This method is used for delete category
@@ -81,10 +93,24 @@ public class CategoryService {
 		category.setId(categoryId);
 		
 		try {
-			categoryRepository.deleteById(categoryId);
+			Boolean active = false;
+			categoryRepository.updateStatus(categoryId, active);
 		} catch (Exception e) {
 			throw new ServiceException(MessageConstant.CATEGORY_DELETE);		
 			}
+	}
+
+	public Category viewCategory(Integer categoryId) throws ServiceException {
+		
+		Optional<Category> findById = categoryRepository.findById(categoryId);
+		if (findById.isPresent()) {
+			return findById.get();
+		}
+		else {
+			throw new ServiceException("Invalid id");
+		}
+		
+		
 	}
 }
 

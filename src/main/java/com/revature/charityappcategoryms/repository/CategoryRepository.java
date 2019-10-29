@@ -1,5 +1,7 @@
 package com.revature.charityappcategoryms.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +14,11 @@ import com.revature.charityappcategoryms.model.Category;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 	@Modifying
-	@Query("DELETE from Category where id = :id")
-	void deleteById(@Param("id") int id);
+	//@Query("DELETE from Category where id = :id")
+	@Query("UPDATE  Category set active = :active where id = :id")
+	void updateStatus(@Param("id") int id, @Param("active") Boolean active);
+
+	@Query("from Category where active= 1")
+	List<Category> findActiveCategories();
 	
 }

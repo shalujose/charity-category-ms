@@ -73,6 +73,15 @@ public class CategoryController {
 
 	}
 	
+	@GetMapping("/active")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Category> viewActiveCategory() throws ServiceException {
+		List<Category> viewResponse = categoryService.listActiveCategory();
+		return viewResponse;
+
+	}
+	
+	
 	/**
 	 * This method delete category data
 	 * @param categoryId
@@ -89,6 +98,32 @@ public class CategoryController {
 		try {
 			categoryService.deleteCategory(categoryId);
 			return new ResponseEntity<>(HttpStatus.CREATED);
+
+		} catch (ServiceException e) {
+			Message message = new Message(e.getMessage());
+			return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+		}
+
+	}
+	
+
+	/**
+	 * This method delete category data
+	 * @param categoryId
+	 * @return response success or failure
+	 * @throws ServiceException on input error
+	 */
+	@GetMapping("{id}")
+	@ApiOperation(value = "categoryAPI")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Category detail", response = String.class),
+			@ApiResponse(code = 400, message = "Invalid Category", response = Category.class) })
+	
+	public ResponseEntity<?> view(@PathVariable("id") Integer categoryId) throws ServiceException {
+
+		
+		try {
+			Category category = categoryService.viewCategory(categoryId);
+			return new ResponseEntity<>(category, HttpStatus.OK);
 
 		} catch (ServiceException e) {
 			Message message = new Message(e.getMessage());
