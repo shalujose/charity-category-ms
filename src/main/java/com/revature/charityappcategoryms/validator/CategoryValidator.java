@@ -12,12 +12,10 @@ import com.revature.charityappcategoryms.service.AdminService;
 public class CategoryValidator {
 	
 	public void categoryValidation(Category category) throws ValidatorException {
-        int categoryId=category.getId();
+       
         String categoryName=category.getCategoryName();
         int creatorId = category.getCreatedBy(); 
-        if (categoryId == 0) {
-            throw new ValidatorException(MessageConstant.CATEGORY_VALIDATOR);
-        }
+        
         if (categoryName == null){
             throw new ValidatorException(MessageConstant.CATEGORY_NAME_VALIDATOR);
         }
