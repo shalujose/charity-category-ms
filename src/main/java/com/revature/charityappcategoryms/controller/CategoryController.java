@@ -70,4 +70,22 @@ public class CategoryController {
 		return viewResponse;
 
 	}
+	
+	@PostMapping()
+	@ApiOperation(value = "categoryAPI")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Category deleted", response = String.class),
+			@ApiResponse(code = 400, message = "Invalid Category", response = Category.class) })
+	
+	public ResponseEntity<?> deleteByCategory( int categoryId) throws ServiceException {
+
+		try {
+			categoryService.deleteCategory(categoryId);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+
+		} catch (ServiceException e) {
+			Message message = new Message(e.getMessage());
+			return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+		}
+
+	}
 }

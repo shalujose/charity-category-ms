@@ -69,4 +69,17 @@ public class CategoryService {
 		return catelist;
 	}
 
+
+	@Transactional
+	public void deleteCategory( int categoryId) throws ServiceException {
+		Category category =new Category();
+		category.setId(categoryId);
+		
+		try {
+			categoryRepository.deleteById(categoryId);
+		} catch (Exception e) {
+			throw new ServiceException(MessageConstant.CATEGORY_DELETE);		
+			}
+	}
 }
+

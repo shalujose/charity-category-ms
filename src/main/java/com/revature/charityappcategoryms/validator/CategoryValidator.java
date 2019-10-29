@@ -2,7 +2,6 @@ package com.revature.charityappcategoryms.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.revature.charityappcategoryms.dto.MessageConstant;
 import com.revature.charityappcategoryms.exception.ValidatorException;
 import com.revature.charityappcategoryms.model.Category;
