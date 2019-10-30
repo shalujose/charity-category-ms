@@ -73,6 +73,12 @@ public class CategoryController {
 
 	}
 	
+	
+	/**
+	 * This method shows only active category details
+	 * @return list this returns active categories
+	 * @throws ServiceException on input error
+	 */
 	@GetMapping("/active")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Category> viewActiveCategory() throws ServiceException {
@@ -84,7 +90,7 @@ public class CategoryController {
 	
 	/**
 	 * This method delete category data
-	 * @param categoryId
+	 * @param categoryId is the parameter to deleteByCategory
 	 * @return response success or failure
 	 * @throws ServiceException on input error
 	 */
@@ -108,8 +114,8 @@ public class CategoryController {
 	
 
 	/**
-	 * This method delete category data
-	 * @param categoryId
+	 * This method search a category 
+	 * @param categoryId is the parameter to view method
 	 * @return response success or failure
 	 * @throws ServiceException on input error
 	 */

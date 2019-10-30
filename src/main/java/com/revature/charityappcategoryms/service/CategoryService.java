@@ -70,6 +70,11 @@ public class CategoryService {
 		return catelist;
 	}
 	
+	/**
+	 * This method used to display the active categories
+	 * @return list this returns active categories
+	 * @throws ServiceException on output error
+	 */
 	@Transactional
 	public List<Category> listActiveCategory() throws ServiceException {
 		List<Category> catelist=null;
@@ -100,6 +105,12 @@ public class CategoryService {
 			}
 	}
 
+	/**
+	 * This method display the searched category details
+	 * @param categoryId is the parameter to viewCategory method
+	 * @return list this returns category data
+	 * @throws ServiceException in case of invalid input
+	 */
 	public Category viewCategory(Integer categoryId) throws ServiceException {
 		
 		Optional<Category> findById = categoryRepository.findById(categoryId);

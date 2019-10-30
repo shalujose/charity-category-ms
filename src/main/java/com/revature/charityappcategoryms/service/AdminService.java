@@ -8,6 +8,9 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class AdminService {
 	
+	/**
+	 * This method for API call
+	 */
 	@Autowired
     RestTemplate restTemplate;
     public Boolean validateId(final Integer userId) {
