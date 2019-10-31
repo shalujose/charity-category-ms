@@ -140,5 +140,20 @@ public class CategoryService {
 		
 		
 	}
+
+	public void update(CategoryDTO categoryDTO) throws ServiceException{
+		
+		Optional<Category> findById = categoryRepository.findById(categoryDTO.getId());
+		if (findById.isPresent()) {
+			Category category = findById.get();
+			category.setActive(categoryDTO.isActive());
+			
+			categoryRepository.save(category);
+		}
+		else {
+			throw new ServiceException("Invalid category id");
+		}
+		
+	}
 }
 

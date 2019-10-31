@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -87,6 +88,32 @@ public class CategoryController {
 
 	}
 	
+	
+	
+	/**
+	 * This method update category status
+	 * @param categoryId is the parameter to deleteByCategory
+	 * @return response success or failure
+	 * @throws ServiceException on input error
+	 */
+	@PutMapping("{id}")
+	@ApiOperation(value = "categoryAPI")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Category Updated", response = String.class),
+			@ApiResponse(code = 400, message = "Invalid Category", response = Category.class) })
+	
+	public ResponseEntity<?> updateStatus(@PathVariable("id") Integer id, @RequestBody CategoryDTO categoryDTO) throws ServiceException {
+
+		try {
+			categoryDTO.setId(id);
+			categoryService.update(categoryDTO);
+			return new ResponseEntity<>(HttpStatus.OK);
+
+		} catch (ServiceException e) {
+			Message message = new Message(e.getMessage());
+			return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+		}
+
+	}
 	
 	/**
 	 * This method delete category data
