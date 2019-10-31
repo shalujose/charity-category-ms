@@ -147,7 +147,7 @@ public class CategoryService {
 		Optional<Category> findById = categoryRepository.findById(categoryDTO.getId());
 		if (findById.isPresent()) {
 			Category category = findById.get();
-			category.setActive(categoryDTO.isActive());
+			category.setActive(categoryDTO.getActive());
 			
 			categoryRepository.save(category);
 		}
