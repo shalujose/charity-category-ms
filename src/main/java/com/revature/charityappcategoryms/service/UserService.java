@@ -20,7 +20,7 @@ public class UserService {
         String apiUrl="https://userapp-v1.herokuapp.com";
         UserDto result = null;
 		try {
-			ResponseEntity <UserDto> postForEntity = restTemplate.getForEntity(apiUrl + "/user/" + userId,UserDto.class);
+			ResponseEntity <UserDto> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/" + userId,UserDto.class);
 			result = postForEntity.getBody();
 		} catch (RestClientException e) {
 			e.printStackTrace();
