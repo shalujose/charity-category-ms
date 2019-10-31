@@ -75,8 +75,9 @@ public class CategoryService {
 	           
 	           UserDto user= userservice.getUserId(category.getCreatedBy());
 	           if ( user != null) {
-	              dto.setCreatedByname(user.getName());
+	              dto.setCreatedByName(user.getName());
 	           }
+	           dto.setActive(category.isActive());
 	           listDto.add(dto);
 	       }
 	       if (listDto.isEmpty()) {
@@ -115,7 +116,7 @@ public class CategoryService {
 		category.setId(categoryId);
 		
 		try {
-			Boolean active = false;
+			Boolean active = true;
 			categoryRepository.updateStatus(categoryId, active);
 		} catch (Exception e) {
 			throw new ServiceException(MessageConstant.CATEGORY_DELETE);		
