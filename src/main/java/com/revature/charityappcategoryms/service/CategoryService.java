@@ -2,13 +2,14 @@ package com.revature.charityappcategoryms.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.revature.charityappcategoryms.dto.UserDto;
 import com.revature.charityappcategoryms.dto.CategoryDTO;
 import com.revature.charityappcategoryms.dto.MessageConstant;
 import com.revature.charityappcategoryms.exception.ServiceException;
@@ -24,6 +25,8 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private CategoryValidator categoryvalidator;
+	@Autowired
+	private UserService userservice;
 
 	/**
 	 * This method is used to add new categories 
@@ -60,15 +63,29 @@ public class CategoryService {
 	 * @throws ServiceException 
 	 */
 	@Transactional
-	public List<Category> listCategory() throws ServiceException {
-		List<Category> catelist=null;
-		catelist= categoryRepository.findAll();
-		if(catelist.isEmpty()) {
-			throw new ServiceException(MessageConstant.INVALID_LIST);
-		}
-		
-		return catelist;
+	public List<CategoryDTO> listCategory() throws ServiceException {
+		List<Category> catelist= categoryRepository.findAll();
+		List<CategoryDTO> listDto=new ArrayList<CategoryDTO>();
+	       for (Category category : catelist) {
+	    	   CategoryDTO dto = new CategoryDTO();
+	           dto.setId(category.getId());
+	           dto.setCategoryName(category.getCategoryName());
+	           dto.setCreatedBy(category.getCreatedBy());
+	           dto.setCreatedDate(category.getCreatedDate());
+	           
+	           UserDto user= userservice.getUserId(category.getCreatedBy());
+	           if ( user != null) {
+	              dto.setCreatedByname(user.getName());
+	           }
+	           listDto.add(dto);
+	       }
+	       if (listDto.isEmpty()) {
+	           throw new ServiceException(MessageConstant.UNABLE_TO_LIST_NAME);
+	       }
+	       return listDto;
+	       
 	}
+
 	
 	/**
 	 * This method used to display the active categories

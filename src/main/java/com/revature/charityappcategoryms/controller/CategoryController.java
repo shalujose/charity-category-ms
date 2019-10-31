@@ -67,10 +67,10 @@ public class CategoryController {
 	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Category> viewCategory() throws ServiceException {
-		List<Category> viewResponse = categoryService.listCategory();
+	public List<CategoryDTO> viewCategory() throws ServiceException {
+		List<CategoryDTO> viewResponse = categoryService.listCategory();
 		return viewResponse;
-
+		
 	}
 	
 	

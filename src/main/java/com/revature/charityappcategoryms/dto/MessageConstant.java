@@ -13,4 +13,5 @@ public class MessageConstant {
 	public static final String CATEGORY_CREATORID="Creator id does not exist";
 	public static final String INVALID_LIST="Category is empty";
 	public static final String CATEGORY_DELETE="Unable to delete category";
+	public static final String UNABLE_TO_LIST_NAME="Unable to view creator name";
 }
