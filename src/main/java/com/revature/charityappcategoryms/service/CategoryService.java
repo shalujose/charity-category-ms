@@ -139,9 +139,13 @@ public class CategoryService {
 			throw new ServiceException("Invalid id");
 		}
 		
-		
 	}
 
+	/**
+	 * This method is used to update the category status
+	 * @param categoryDTO is the parameter to update method
+	 * @throws ServiceException on input error
+	 */
 	public void update(CategoryDTO categoryDTO) throws ServiceException{
 		
 		Optional<Category> findById = categoryRepository.findById(categoryDTO.getId());
